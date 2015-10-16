@@ -1,0 +1,81 @@
+@import url(http://yui.yahooapis.com/pure/0.6.0/pure-min.css);
+@import url(http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css);
+
+body {
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+    font-family: Helvetica;
+}
+
+.splash {
+    width: 60%;
+    height: 20%;
+    margin: auto;
+    position: absolute;
+    top: 300px; left: 0; bottom: 0; right: 0;
+    text-align: center;
+    font-size: 18pt;
+}
+
+.pure-button {
+    color: white;
+    background: #88d6ad;
+}
+
+.search {
+    height: 20%;
+    width: 60%;
+    top: 100pt; left: 0; bottom: 0; right: 0;
+    margin: auto;
+    padding-top: 80pt;
+    text-align: center;
+
+}
+
+
+#results {
+    margin-top: 100pt;
+}
+
+.result {
+    background:rgba(255,255,255,0.7);
+    border-radius: 10pt;
+    padding: 10pt;
+    margin: 10pt;
+}
+
+.result img {
+    border-radius: 25px;
+    width: 100pt;
+    height: auto;
+    vertical-align: middle;
+}
+
+.resulttext {
+    padding-top: 10pt;
+}
+
+.resultheading {
+    font-size: 36pt;    
+}
+
+.resultsub {
+    font-size: 18pt;
+}
+
+.resultitem {
+    background:rgba(255,255,255,0.5);
+/*    border-radius: 25px;*/
+    box-sizing: border-box;
+    height: 300px;    
+    padding: 20%;
+    margin: 10pt;
+}
+
+a { 
+    text-decoration: none;
+    color: black;
+}
