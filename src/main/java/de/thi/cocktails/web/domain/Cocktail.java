@@ -1,6 +1,7 @@
 package de.thi.cocktails.web.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,10 @@ public class Cocktail implements Serializable {
 
     private String name;
     private String description;
-    private List<String> ingredients;
+    private List<String> ingredients = new ArrayList<>();
+
+    public Cocktail() {
+    }
 
     public Cocktail(String name) {
         this.name = name;
@@ -30,6 +34,10 @@ public class Cocktail implements Serializable {
 
     public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public void addIngredient(String ingredient) {
+        ingredients.add(ingredient);
     }
 
     public String getName() {

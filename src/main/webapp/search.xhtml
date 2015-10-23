@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="style/style.css"/>
 </h:head>
 <h:body>
+
+    <div class="navigation">
+        <h:form>
+            <h:commandButton action="/add.xhtml" value="#{msg['navigation.add']}" styleClass="pure-button" />
+        </h:form>
+    </div>
+
     <h:form styleClass="splash pure-form">
         <h:inputText value="#{search.searchString}" >
             <f:passThroughAttribute name="placeholder" value="#{msg['search.placeholder']}" />

@@ -10,6 +10,12 @@ body {
     font-family: Helvetica;
 }
 
+.navigation {
+    width: 90%;
+    padding: 20pt;
+    text-align: right;
+}
+
 .splash {
     width: 60%;
     height: 20%;
