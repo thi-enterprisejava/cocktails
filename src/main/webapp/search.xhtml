@@ -3,16 +3,18 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
-<head>
-    <title>Cocktails</title>
+<h:head>
+    <title>#{msg['common.title']}</title>
     <link rel="stylesheet" href="style/style.css"/>
-</head>
+</h:head>
 <h:body>
     <h:form styleClass="splash pure-form">
-        <h:inputText value="#{search.searchString}"  placeholder="Margarita" />
-        <h:commandButton action="#{search.doSearch}" value="Suchen" styleClass="pure-button"/>
+        <h:inputText value="#{search.searchString}" >
+            <f:passThroughAttribute name="placeholder" value="#{msg['search.placeholder']}" />
+        </h:inputText>
+        <h:commandButton action="#{search.doSearch}" value="#{msg['search.search.button']}" styleClass="pure-button"/>
     </h:form>
 </h:body>
 </html>
