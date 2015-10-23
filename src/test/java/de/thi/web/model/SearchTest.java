@@ -4,10 +4,8 @@ import de.thi.cocktails.web.model.Search;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 public class SearchTest {
 
@@ -30,7 +28,7 @@ public class SearchTest {
     @Test
     public void thatResultIsNotEmpty() throws Exception {
         search.doSearch();
-        assertThat("result should contain cocktails", search.getResult(), not(empty()));
+        assertNotNull("result should contain cocktails", search.getResult());
     }
 
 }
