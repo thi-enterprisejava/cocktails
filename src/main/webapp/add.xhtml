@@ -32,8 +32,8 @@
 
                     <ui:repeat value="#{selectedCocktail.cocktail.ingredients}" var="ingredient">
                         <div class="pure-control-group">
-                            #{msg['add.ingredient']}
-                            #{ingredient}
+                            <h:outputLabel value="#{msg['add.ingredient']}"/>
+                            <h:inputText value="#{ingredient}" />
                         </div>
                     </ui:repeat>
 

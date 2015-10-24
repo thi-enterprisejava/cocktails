@@ -44,6 +44,11 @@ public class SelectedCocktail implements Serializable {
     // Action Methods
     //***********************************************************************
 
+    public String doShow(Cocktail cocktail) {
+        this.cocktail = cocktail;
+        return "details";
+    }
+
     public String doSave() {
         System.out.println("doSave");
 

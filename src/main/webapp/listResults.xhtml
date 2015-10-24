@@ -3,18 +3,38 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
       xml:lang="en" lang="en">
 <head>
     <title>Ergebnisse</title>
 </head>
 <body>
 
-<h2>Ergebnisse</h2>
+<ui:composition template="/template.xhtml">
+<ui:define name="content">
+
+<h:form>
+<div id="results">
 
 <ui:repeat value="#{search.result}" var="cocktail">
-    <div>#{cocktail.name}</div>
+    <div class="pure-g result">
+        <div class="pure-u-1 pure-u-md-1-5">
+            <img src="images/cocktail1.jpg" />
+        </div>
+        <div class="pure-u-1 pure-u-md-4-5 resulttext">
+            <span class="resultheading">
+                <h:commandLink action="#{selectedCocktail.doShow(cocktail)}" value="#{cocktail.name}"/>
+            </span><br/>
+            <span class="resultsub">Text</span>
+        </div>
+    </div>
+
 </ui:repeat>
+</div>
+</h:form>
+
+</ui:define>
+</ui:composition>
 
 </body>
 </html>

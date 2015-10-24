@@ -30,6 +30,8 @@ public class Search implements Serializable {
         return result;
     }
 
+
+
     public String doSearch() {
 
         System.out.println("doSearch");
@@ -40,8 +42,6 @@ public class Search implements Serializable {
                 new Cocktail("Gin Tonic"),
                 new Cocktail("Cuba Libre")
         );
-
-
         return "listResults";
     }
 

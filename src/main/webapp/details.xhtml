@@ -11,26 +11,32 @@
 
 <h:body>
 
-    <h:messages />
+<ui:composition template="/template.xhtml">
+<ui:define name="content">
 
+    <div class="content">
 
-    <div>
-            #{msg['add.name']}:
-            #{selectedCocktail.cocktail.name}
-        </div>
+        <h1>#{selectedCocktail.cocktail.name}</h1>
 
+        <p>
+            Zutaten:
+        </p>
+        <ul>
         <ui:repeat value="#{selectedCocktail.cocktail.ingredients}" var="ingredient">
-            <div>
-                #{msg['add.ingredient']}:
+            <li>
                 #{ingredient}
-            </div>
+            </li>
         </ui:repeat>
+        </ul>
 
-        <div>
-            #{msg['add.description']}:
+        <p>
             #{selectedCocktail.cocktail.description}
-        </div>
+        </p>
 
+    </div>
+
+</ui:define>
+</ui:composition>
 
 </h:body>
 </html>
