@@ -6,46 +6,58 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xml:lang="en" lang="en">
 <head>
-    <title></title>
+    <title>Cocktails</title>
 </head>
-<h:body>
+<body>
 
-    <h:form>
 
-        <div>
-            <h:outputLabel for="name" value="#{msg['add.name']}"/>
-            <h:inputText id="name"
-                         value="#{selectedCocktail.cocktail.name}"
-                         validatorMessage="#{msg['add.name.validationMessage']}">
-                <f:validateRequired/>
-                <f:validateLength minimum="3" maximum="30"/>
-            </h:inputText>
-            <h:message for="name" />
+    <ui:composition template="/template.xhtml">
+    <ui:define name="content">
+
+        <div class="content">
+
+            <h:form styleClass="pure-form pure-form-aligned">
+                <fieldset>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="name" value="#{msg['add.name']}"/>
+                        <h:inputText id="name"
+                                     value="#{selectedCocktail.cocktail.name}"
+                                     validatorMessage="#{msg['add.name.validationMessage']}">
+                            <f:validateRequired/>
+                            <f:validateLength minimum="3" maximum="30"/>
+                        </h:inputText>
+                        <h:message for="name" />
+                    </div>
+
+                    <ui:repeat value="#{selectedCocktail.cocktail.ingredients}" var="ingredient">
+                        <div class="pure-control-group">
+                            #{msg['add.ingredient']}
+                            #{ingredient}
+                        </div>
+                    </ui:repeat>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="newIngredient" value="#{msg['add.ingredient']}"/>
+                        <h:inputText id="newIngredient" value="#{selectedCocktail.newIngredient}" />
+                        <h:commandButton actionListener="#{selectedCocktail.doAddIngredient}" value="#{msg['add.addIngredient']}" styleClass="pure-button"/>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <h:outputLabel for="description" value="#{msg['add.description']}"/>
+                        <h:inputTextarea id="description" value="#{selectedCocktail.cocktail.description}" />
+                    </div>
+
+                    <div class="pure-controls">
+                        <h:commandButton action="#{selectedCocktail.doSave}" value="#{msg['add.save']}" styleClass="pure-button" />
+                    </div>
+                </fieldset>
+
+            </h:form>
+
         </div>
+    </ui:define>
+    </ui:composition>
 
-        <ui:repeat value="#{selectedCocktail.cocktail.ingredients}" var="ingredient">
-            <div>
-                #{msg['add.ingredient']}:
-                #{ingredient}
-            </div>
-        </ui:repeat>
-
-        <div>
-            <h:outputLabel for="newIngredient" value="#{msg['add.ingredient']}"/>:
-            <h:inputText id="newIngredient" value="#{selectedCocktail.newIngredient}" />
-            <h:commandButton actionListener="#{selectedCocktail.doAddIngredient}" value="#{msg['add.addIngredient']}" />
-        </div>
-
-        <div>
-            <h:outputLabel for="description" value="#{msg['add.description']}"/>:
-            <h:inputTextarea id="description" value="#{selectedCocktail.cocktail.description}" />
-        </div>
-
-        <div>
-            <h:commandButton action="#{selectedCocktail.doSave}" value="#{msg['add.save']}" />
-        </div>
-
-    </h:form>
-
-</h:body>
+</body>
 </html>

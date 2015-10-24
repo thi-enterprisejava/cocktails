@@ -4,14 +4,17 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xml:lang="en" lang="en">
+      xml:lang="en" lang="en">
 <head>
     <title>#{selectedCocktail.cocktail.name}</title>
 </head>
 
 <h:body>
 
-        <div>
+    <h:messages />
+
+
+    <div>
             #{msg['add.name']}:
             #{selectedCocktail.cocktail.name}
         </div>

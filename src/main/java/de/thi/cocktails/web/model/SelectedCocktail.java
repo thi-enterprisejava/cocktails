@@ -3,6 +3,8 @@ package de.thi.cocktails.web.model;
 import de.thi.cocktails.web.domain.Cocktail;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -44,6 +46,10 @@ public class SelectedCocktail implements Serializable {
 
     public String doSave() {
         System.out.println("doSave");
+
+        // TODO read from resource bundle.
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cocktail added"));
+
         return "details";
     }
 

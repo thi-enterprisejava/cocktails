@@ -11,9 +11,21 @@ body {
 }
 
 .navigation {
+    margin: auto;
     width: 90%;
     padding: 20pt;
     text-align: right;
+}
+
+.content {
+    width: 90%;
+    margin: auto;
+    background:rgba(255,255,255,0.7);
+
+}
+
+label {
+
 }
 
 .splash {
