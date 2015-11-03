@@ -1,4 +1,4 @@
-package de.thi.cocktails.web.domain;
+package de.thi.cocktails.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,5 +46,10 @@ public class Cocktail implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + ingredients;
     }
 }
