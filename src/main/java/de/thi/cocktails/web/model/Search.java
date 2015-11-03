@@ -1,11 +1,12 @@
 package de.thi.cocktails.web.model;
 
-import de.thi.cocktails.web.domain.Cocktail;
+import de.thi.cocktails.repository.CocktailRepository;
+import de.thi.cocktails.domain.Cocktail;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,6 +15,13 @@ import java.util.List;
 @Named
 @SessionScoped
 public class Search implements Serializable {
+
+    private CocktailRepository cocktailRepository;
+
+    @Inject
+    public Search(CocktailRepository cocktailRepository) {
+        this.cocktailRepository = cocktailRepository;
+    }
 
     private String searchString;
     private List<Cocktail> result;
@@ -31,17 +39,12 @@ public class Search implements Serializable {
     }
 
 
-
     public String doSearch() {
 
         System.out.println("doSearch");
 
-        // Simulate search result
-        result = Arrays.asList(
-                new Cocktail("Zombie"),
-                new Cocktail("Gin Tonic"),
-                new Cocktail("Cuba Libre")
-        );
+        result = cocktailRepository.findByName(searchString);
+
         return "listResults";
     }
 

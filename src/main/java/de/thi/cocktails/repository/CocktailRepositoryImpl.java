@@ -1,7 +1,7 @@
 package de.thi.cocktails.repository;
 
 import de.thi.cocktails.domain.Cocktail;
-import de.thi.cocktails.repository.CocktailRepository;
+import de.thi.cocktails.interceptor.Profiled;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
+@Profiled
 public class CocktailRepositoryImpl implements CocktailRepository {
 
     private List<Cocktail> cocktails = new ArrayList<>();

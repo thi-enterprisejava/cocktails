@@ -1,5 +1,7 @@
 package de.thi.web.model;
 
+import de.thi.cocktails.repository.CocktailRepository;
+import de.thi.cocktails.repository.CocktailRepositoryImpl;
 import de.thi.cocktails.web.model.Search;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +18,8 @@ public class SearchTest {
 
     @Before
     public void setUp() throws Exception {
-        search = new Search();
+        CocktailRepository cocktailRepository = new CocktailRepositoryImpl();
+        search = new Search(cocktailRepository);
     }
 
     @Test
