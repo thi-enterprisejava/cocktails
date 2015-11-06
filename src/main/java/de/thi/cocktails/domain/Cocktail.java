@@ -52,4 +52,26 @@ public class Cocktail implements Serializable {
     public String toString() {
         return name + " " + ingredients;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cocktail cocktail = (Cocktail) o;
+
+        if (name != null ? !name.equals(cocktail.name) : cocktail.name != null) return false;
+        if (description != null ? !description.equals(cocktail.description) : cocktail.description != null)
+            return false;
+        return !(ingredients != null ? !ingredients.equals(cocktail.ingredients) : cocktail.ingredients != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
+        return result;
+    }
 }

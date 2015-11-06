@@ -15,13 +15,14 @@ import java.util.List;
 @ViewScoped
 public class SelectedCocktail implements Serializable {
 
-    private CocktailRepository cocktailRepository;
+    private final CocktailRepository cocktailRepository;
+    private final FacesContext facesContext;
 
     @Inject
-    public SelectedCocktail(CocktailRepository cocktailRepository) {
+    public SelectedCocktail(CocktailRepository cocktailRepository,
+                            FacesContext facesContext) {
         this.cocktailRepository = cocktailRepository;
-
-        this.cocktail = new Cocktail();
+        this.facesContext = facesContext;
     }
 
     private Cocktail cocktail;
@@ -65,8 +66,12 @@ public class SelectedCocktail implements Serializable {
     public void init() {
         System.out.println("SelectedCocktail#init");
         List<Cocktail> list = cocktailRepository.findByName(cocktailName);
-        System.out.println("Found cocktail: " + list.get(0));
-        cocktail = list.get(0);
+        if(list.size() > 0) {
+            System.out.println("Found cocktail: " + list.get(0));
+            cocktail = list.get(0);
+        } else {
+            System.out.println("No cocktail " + cocktailName + " found.");
+        }
     }
 
     public String doSave() {
@@ -75,7 +80,7 @@ public class SelectedCocktail implements Serializable {
         cocktailRepository.add(cocktail);
 
         // TODO read from resource bundle.
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cocktail added"));
+        facesContext.addMessage(null, new FacesMessage("Cocktail added"));
 
         return "details.xhtml?faces-redirect=true&cocktail="+cocktail.getName();
     }

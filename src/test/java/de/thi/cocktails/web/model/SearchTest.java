@@ -1,9 +1,13 @@
-package de.thi.web.model;
+package de.thi.cocktails.web.model;
 
+import de.thi.cockails.repository.CocktailRepositoryMock;
+import de.thi.cocktails.domain.Cocktail;
 import de.thi.cocktails.repository.CocktailRepository;
 import de.thi.cocktails.repository.CocktailRepositoryImpl;
 import de.thi.cocktails.web.model.Search;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,8 +22,8 @@ public class SearchTest {
 
     @Before
     public void setUp() throws Exception {
-        CocktailRepository cocktailRepository = new CocktailRepositoryImpl();
-        search = new Search(cocktailRepository);
+        CocktailRepository mockedCocktailRepository = new CocktailRepositoryMock();
+        search = new Search(mockedCocktailRepository);
     }
 
     @Test
@@ -33,5 +37,13 @@ public class SearchTest {
         search.doSearch();
         assertNotNull("result should contain cocktails", search.getResult());
     }
+
+    @Test
+    public void thatResultsContainsAllCocktailsFromRepository() throws Exception {
+        search.doSearch();
+        assertEquals(1, search.getResult().size());
+        assertEquals(new Cocktail("Gin Tonic"), search.getResult().get(0));
+    }
+
 
 }
