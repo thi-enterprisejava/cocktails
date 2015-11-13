@@ -39,16 +39,10 @@
         </dependency>
         <dependency>
             <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-arquillian-container-embedded</artifactId>
+            <artifactId>wildfly-arquillian-container-remote</artifactId>
             <version>8.2.1.Final</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.wildfly</groupId>-->
-            <!--<artifactId>wildfly-arquillian-container-remote</artifactId>-->
-            <!--<version>8.2.1.Final</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
     </dependencies>
     <build>
         <finalName>cocktails</finalName>
@@ -58,33 +52,6 @@
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.0.2.Final</version>
             </plugin>
-
-            <!-- Unpack wildfly for embedded container -->
-            <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>process-test-classes</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.wildfly</groupId>
-                                    <artifactId>wildfly-dist</artifactId>
-                                    <version>8.2.1.Final</version>
-                                    <type>zip</type>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>target</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
         </plugins>
     </build>
     <properties>
