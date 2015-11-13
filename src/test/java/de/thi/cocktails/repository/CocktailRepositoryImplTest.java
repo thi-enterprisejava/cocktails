@@ -1,4 +1,4 @@
-package de.thi.cockails.repository;
+package de.thi.cocktails.repository;
 
 import de.thi.cocktails.domain.Cocktail;
 import de.thi.cocktails.repository.CocktailRepository;

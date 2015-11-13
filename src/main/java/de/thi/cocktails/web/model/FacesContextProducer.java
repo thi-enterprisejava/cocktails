@@ -1,8 +1,10 @@
 package de.thi.cocktails.web.model;
 
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
-import javax.ws.rs.Produces;
 
+@Dependent
 public class FacesContextProducer {
 
     @Produces

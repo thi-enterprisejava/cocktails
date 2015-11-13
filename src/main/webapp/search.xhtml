@@ -11,11 +11,11 @@
     <ui:composition template="/template.xhtml">
         <ui:define name="content">
 
-            <h:form styleClass="splash pure-form">
-                <h:inputText value="#{search.searchString}" >
+            <h:form styleClass="splash pure-form" prependId="false">
+                <h:inputText value="#{search.searchString}" id="searchText" >
                     <f:passThroughAttribute name="placeholder" value="#{msg['search.placeholder']}" />
                 </h:inputText>
-                <h:commandButton action="#{search.doSearch}" value="#{msg['search.search.button']}" styleClass="pure-button"/>
+                <h:commandButton action="#{search.doSearch}" id="searchButton" value="#{msg['search.search.button']}" styleClass="pure-button"/>
             </h:form>
 
         </ui:define>

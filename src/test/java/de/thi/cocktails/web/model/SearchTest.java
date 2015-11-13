@@ -1,13 +1,9 @@
 package de.thi.cocktails.web.model;
 
-import de.thi.cockails.repository.CocktailRepositoryMock;
+import de.thi.cocktails.repository.CocktailRepositoryMock;
 import de.thi.cocktails.domain.Cocktail;
 import de.thi.cocktails.repository.CocktailRepository;
-import de.thi.cocktails.repository.CocktailRepositoryImpl;
-import de.thi.cocktails.web.model.Search;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
