@@ -9,7 +9,7 @@
 <h:head>
     <title>#{selectedCocktail.cocktail.name}</title>
     <f:metadata>
-        <f:viewParam name="cocktail" value="#{selectedCocktail.cocktailName}" />
+        <f:viewParam name="cocktail" value="#{selectedCocktail.cocktailId}" />
         <f:viewAction action="#{selectedCocktail.init}" />
     </f:metadata>
 </h:head>

@@ -1,17 +1,16 @@
 package de.thi.cocktails.web.model;
 
 import de.thi.cocktails.domain.Cocktail;
-import de.thi.cocktails.repository.CocktailRepository;
+import de.thi.cocktails.service.CocktailService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -23,34 +22,34 @@ public class SelectedCocktailTest {
      */
     SelectedCocktail selectedCocktail;
 
-    CocktailRepository mockedCocktailRepository;
+    CocktailService mockedCocktailService;
 
     @Before
     public void setUp() throws Exception {
-        mockedCocktailRepository = mock(CocktailRepository.class);
+        mockedCocktailService = mock(CocktailService.class);
         FacesContext mockedFacesContext = mock(FacesContext.class);
-        selectedCocktail = new SelectedCocktail(mockedCocktailRepository, mockedFacesContext);
+        selectedCocktail = new SelectedCocktail(mockedCocktailService, mockedFacesContext);
     }
 
     @Test
     public void thatInitLoadsAvailableCocktail() throws Exception {
-        selectedCocktail.setCocktailName("Zombie");
-        when(mockedCocktailRepository.findByName("Zombie"))
-                .thenReturn(Arrays.asList(new Cocktail("Zombie")));
+        selectedCocktail.setCocktailId(1L);
+        when(mockedCocktailService.findById(1L))
+                .thenReturn(new Cocktail("Zombie"));
 
         selectedCocktail.init();
 
         Cocktail cocktail = selectedCocktail.getCocktail();
         assertNotNull(cocktail);
         assertEquals(new Cocktail("Zombie"), cocktail);
-        verify(mockedCocktailRepository).findByName("Zombie");
+        verify(mockedCocktailService).findById(1L);
     }
 
     @Test
-    public void thatNoCocktailIsLoadedWhenCocktailNameNotFound() throws Exception {
-        selectedCocktail.setCocktailName("Zombie");
-        when(mockedCocktailRepository.findByName("Zombie"))
-                .thenReturn(new ArrayList<>());
+    public void thatNoCocktailIsLoadedWhenCocktailIdNotFound() throws Exception {
+        selectedCocktail.setCocktailId(2L);
+        when(mockedCocktailService.findById(2L))
+                .thenReturn(null);
 
         selectedCocktail.init();
 
@@ -69,7 +68,7 @@ public class SelectedCocktailTest {
         selectedCocktail.doSave();
 
         ArgumentCaptor<Cocktail> argumentCaptor = ArgumentCaptor.forClass(Cocktail.class);
-        verify(mockedCocktailRepository).add(argumentCaptor.capture());
+        verify(mockedCocktailService).add(argumentCaptor.capture());
         Cocktail cocktailSubmittedToRepository = argumentCaptor.getValue();
         assertEquals("Mai Tai", cocktailSubmittedToRepository.getName());
     }

@@ -1,9 +1,9 @@
 package de.thi.cocktails.web.model;
 
-import de.thi.cocktails.repository.CocktailRepository;
 import de.thi.cocktails.domain.Cocktail;
+import de.thi.cocktails.service.CocktailService;
 
-import javax.faces.application.FacesMessage;
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -15,20 +15,26 @@ import java.util.List;
 @ViewScoped
 public class SelectedCocktail implements Serializable {
 
-    private final CocktailRepository cocktailRepository;
+    private final CocktailService cocktailService;
     private final FacesContext facesContext;
 
     @Inject
-    public SelectedCocktail(CocktailRepository cocktailRepository,
+    public SelectedCocktail(CocktailService cocktailService,
                             FacesContext facesContext) {
-        this.cocktailRepository = cocktailRepository;
+        this.cocktailService = cocktailService;
         this.facesContext = facesContext;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("New cocktail");
+        cocktail = new Cocktail();
     }
 
     private Cocktail cocktail;
     private String newIngredient;
 
-    private String cocktailName;
+    private Long cocktailId;
 
     //***********************************************************************
     // Getter / Setter
@@ -50,12 +56,12 @@ public class SelectedCocktail implements Serializable {
         return newIngredient;
     }
 
-    public String getCocktailName() {
-        return cocktailName;
+    public Long getCocktailId() {
+        return cocktailId;
     }
 
-    public void setCocktailName(String cocktailName) {
-        this.cocktailName = cocktailName;
+    public void setCocktailId(Long cocktailId) {
+        this.cocktailId = cocktailId;
     }
 
 
@@ -65,22 +71,20 @@ public class SelectedCocktail implements Serializable {
 
     public void init() {
         System.out.println("SelectedCocktail#init");
-        List<Cocktail> list = cocktailRepository.findByName(cocktailName);
-        if(list.size() > 0) {
-            System.out.println("Found cocktail: " + list.get(0));
-            cocktail = list.get(0);
+
+        Cocktail foundCocktail = cocktailService.findById(cocktailId);
+        if(foundCocktail != null) {
+            System.out.println("Found cocktail: " + foundCocktail);
+            cocktail = foundCocktail;
         } else {
-            System.out.println("No cocktail " + cocktailName + " found.");
+            System.out.println("No cocktail for id " + cocktailId + " found.");
         }
     }
 
     public String doSave() {
         System.out.println("doSave");
 
-        cocktailRepository.add(cocktail);
-
-        // TODO read from resource bundle.
-        facesContext.addMessage(null, new FacesMessage("Cocktail added"));
+        cocktailService.add(cocktail);
 
         return "details.xhtml?faces-redirect=true&cocktail="+cocktail.getName();
     }
