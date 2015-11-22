@@ -2,6 +2,7 @@ package de.thi.cocktails.web.model;
 
 import de.thi.cocktails.domain.Cocktail;
 import de.thi.cocktails.service.CocktailService;
+import de.thi.cocktails.service.CocktailServiceEjb;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -9,7 +10,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.List;
 
 @Named
 @ViewScoped

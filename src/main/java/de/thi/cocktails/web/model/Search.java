@@ -20,6 +20,7 @@ public class Search implements Serializable {
 
     @Inject
     public Search(CocktailService cocktailService) {
+        System.out.println("Create new Search instance");
         this.cocktailService = cocktailService;
     }
 

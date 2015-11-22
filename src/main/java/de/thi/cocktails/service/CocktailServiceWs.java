@@ -9,7 +9,7 @@ import java.util.List;
 
 @WebService
 @Stateless
-public class CocktailWebService {
+public class CocktailServiceWs {
 
     @EJB
     CocktailService cocktailService;

@@ -13,7 +13,7 @@ public class StatisticsService {
     @EJB
     CocktailService cocktailService;
 
-    @Schedule(minute = "*", hour = "*", persistent = false)
+    @Schedule(minute = "0", hour = "*", persistent = false)
     public void logStatistics() {
         List<Cocktail> cocktailList = cocktailService.findAll();
         System.out.println("Currently in database: " + cocktailList.size());

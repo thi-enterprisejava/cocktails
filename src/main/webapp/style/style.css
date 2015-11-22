@@ -15,6 +15,11 @@ body {
     width: 90%;
     padding: 20pt;
     text-align: right;
+    color: white;
+}
+
+.navigation a {
+    color: white;
 }
 
 .content {

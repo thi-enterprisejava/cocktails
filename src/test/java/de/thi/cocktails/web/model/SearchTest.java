@@ -1,8 +1,7 @@
 package de.thi.cocktails.web.model;
 
-import de.thi.cocktails.repository.CocktailRepositoryMock;
 import de.thi.cocktails.domain.Cocktail;
-import de.thi.cocktails.service.CocktailService;
+import de.thi.cocktails.service.CocktailServiceEjb;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -20,11 +19,11 @@ public class SearchTest {
      * class under test
      */
     Search search;
-    private CocktailService mockedCocktailService;
+    private CocktailServiceEjb mockedCocktailService;
 
     @Before
     public void setUp() throws Exception {
-        mockedCocktailService = Mockito.mock(CocktailService.class);
+        mockedCocktailService = Mockito.mock(CocktailServiceEjb.class);
         search = new Search(mockedCocktailService);
     }
 

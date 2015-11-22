@@ -14,7 +14,9 @@
 
     <div class="navigation">
         <h:form>
-            <h:commandButton action="/add.xhtml" value="#{msg['navigation.add']}" styleClass="pure-button" />
+        #{request.remoteUser}
+            <h:commandLink action="#{user.logout}" value="Logout"/>
+        <h:button outcome="/add.xhtml" value="#{msg['navigation.add']}" styleClass="pure-button" />
         </h:form>
     </div>
 

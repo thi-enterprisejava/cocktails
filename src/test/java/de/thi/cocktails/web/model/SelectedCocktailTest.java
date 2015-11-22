@@ -1,7 +1,7 @@
 package de.thi.cocktails.web.model;
 
 import de.thi.cocktails.domain.Cocktail;
-import de.thi.cocktails.service.CocktailService;
+import de.thi.cocktails.service.CocktailServiceEjb;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -22,11 +22,11 @@ public class SelectedCocktailTest {
      */
     SelectedCocktail selectedCocktail;
 
-    CocktailService mockedCocktailService;
+    CocktailServiceEjb mockedCocktailService;
 
     @Before
     public void setUp() throws Exception {
-        mockedCocktailService = mock(CocktailService.class);
+        mockedCocktailService = mock(CocktailServiceEjb.class);
         FacesContext mockedFacesContext = mock(FacesContext.class);
         selectedCocktail = new SelectedCocktail(mockedCocktailService, mockedFacesContext);
     }
