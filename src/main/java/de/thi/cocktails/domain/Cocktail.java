@@ -75,5 +75,19 @@ public class Cocktail implements Serializable {
         return name + " " + ingredients;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Cocktail cocktail = (Cocktail) o;
+
+        return !(name != null ? !name.equals(cocktail.name) : cocktail.name != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
 }

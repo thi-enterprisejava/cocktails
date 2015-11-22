@@ -1,26 +1,41 @@
 package de.thi.cocktails.service;
 
 import de.thi.cocktails.domain.Cocktail;
-import de.thi.cocktails.repository.CocktailRepository;
+import de.thi.cocktails.exception.CocktailAlreadyExistsException;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
+import javax.ejb.AsyncResult;
+import javax.ejb.Asynchronous;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.resource.spi.work.TransactionContext;
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Future;
 
-@ApplicationScoped
+@Stateless
 public class CocktailService {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "primary")
     private EntityManager em;
 
-    @Transactional
-    public void add(Cocktail cocktail) {
+    public CocktailService() {
+        System.out.println("Create new CocktailService instance");
+    }
+
+
+    /**
+     * @throws CocktailAlreadyExistsException
+     */
+    public Cocktail add(Cocktail cocktail) {
+
+        if(findByName(cocktail.getName()).size() > 0) {
+            throw new CocktailAlreadyExistsException(cocktail.getName());
+        }
+
         em.persist(cocktail);
+
+        return cocktail;
     }
 
     public List<Cocktail> findAll() {
@@ -37,4 +52,18 @@ public class CocktailService {
         query.setParameter("name", name + "%");
         return query.getResultList();
     }
+
+
+    @Asynchronous
+    public Future<Cocktail> getRandom() {
+
+        List<Cocktail> cocktailList = findAll();
+        int count = cocktailList.size();
+
+        Random random = new Random();
+        int randomNumber = random.nextInt(count);
+
+        return new AsyncResult<>(cocktailList.get(randomNumber));
+    }
+
 }
