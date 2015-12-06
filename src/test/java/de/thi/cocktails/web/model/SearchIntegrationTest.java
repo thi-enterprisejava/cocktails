@@ -1,8 +1,6 @@
 package de.thi.cocktails.web.model;
 
 import de.thi.cocktails.domain.Cocktail;
-import de.thi.cocktails.repository.CocktailRepository;
-import de.thi.cocktails.repository.CocktailRepositoryImpl;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
@@ -14,14 +12,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import javax.inject.Inject;
 import java.io.File;
 import java.net.URL;
-import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(Arquillian.class)
 public class SearchIntegrationTest {
@@ -36,8 +31,6 @@ public class SearchIntegrationTest {
                 .addAsResource(new File("src/main/resources/messages.properties"))
                 .addClass(Search.class)
                 .addClass(Cocktail.class)
-                .addClass(CocktailRepository.class)
-                .addClass(CocktailRepositoryImpl.class)
                 ;
         System.out.println(webArchive.toString(Formatters.VERBOSE));
         return webArchive;

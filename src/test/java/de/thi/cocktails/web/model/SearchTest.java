@@ -1,6 +1,5 @@
 package de.thi.cocktails.web.model;
 
-import de.thi.cocktails.repository.CocktailRepositoryMock;
 import de.thi.cocktails.domain.Cocktail;
 import de.thi.cocktails.service.CocktailService;
 import org.junit.Before;
