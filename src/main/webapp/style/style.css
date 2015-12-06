@@ -1,5 +1,5 @@
-@import url(http://yui.yahooapis.com/pure/0.6.0/pure-min.css);
-@import url(http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css);
+@import 'pure-min.css';
+@import 'grids-responsive-min.css';
 
 body {
     background-image: url(../images/background.jpg);
@@ -7,7 +7,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: #464646;
-    font-family: Helvetica;
+    font-family: Helvetica, serif;
 }
 
 .navigation {
@@ -15,13 +15,18 @@ body {
     width: 90%;
     padding: 20pt;
     text-align: right;
+    color: white;
+}
+
+.navigation a {
+    color: white;
 }
 
 .content {
     width: 90%;
     margin: auto;
     position: absolute;
-    top: 200px; left: 0; bottom: 50; right: 0;
+    top: 200px; left: 0; bottom: 50px; right: 0;
     background:rgba(255,255,255,0.7);
     border-radius: 10pt;
     padding: 10pt;

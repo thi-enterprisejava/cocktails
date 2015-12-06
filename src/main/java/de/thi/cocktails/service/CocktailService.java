@@ -3,6 +3,8 @@ package de.thi.cocktails.service;
 import de.thi.cocktails.domain.Cocktail;
 import de.thi.cocktails.exception.CocktailAlreadyExistsException;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
@@ -27,6 +29,7 @@ public class CocktailService {
     /**
      * @throws CocktailAlreadyExistsException
      */
+    @RolesAllowed("user")
     public Cocktail add(Cocktail cocktail) {
 
         if(findByName(cocktail.getName()).size() > 0) {
@@ -38,15 +41,18 @@ public class CocktailService {
         return cocktail;
     }
 
+    @PermitAll
     public List<Cocktail> findAll() {
         TypedQuery<Cocktail> query = em.createQuery("SELECT c FROM Cocktail as c", Cocktail.class);
         return query.getResultList();
     }
 
+    @PermitAll
     public Cocktail findById(Long id) {
         return em.find(Cocktail.class, id);
     }
 
+    @PermitAll
     public List<Cocktail> findByName(String name) {
         TypedQuery<Cocktail> query = em.createQuery("SELECT c FROM Cocktail as c WHERE c.name LIKE :name", Cocktail.class);
         query.setParameter("name", name + "%");
@@ -55,6 +61,7 @@ public class CocktailService {
 
 
     @Asynchronous
+    @PermitAll
     public Future<Cocktail> getRandom() {
 
         List<Cocktail> cocktailList = findAll();
