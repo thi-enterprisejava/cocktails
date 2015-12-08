@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
 @Stateless
 public class CocktailService {
 
-    @PersistenceContext(unitName = "primary")
+    @PersistenceContext
     private EntityManager em;
 
     public CocktailService() {

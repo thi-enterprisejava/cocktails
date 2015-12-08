@@ -35,7 +35,8 @@ public class CocktailServiceIntegrationTest {
                 .addClass(Cocktail.class)
                 .addClass(CocktailAlreadyExistsException.class)
                 .addClass(AuthenticatedUser.class)
-                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource("cocktailtest-ds.xml")
                 ;
         System.out.println(webArchive.toString(Formatters.VERBOSE));
         return webArchive;
@@ -44,14 +45,9 @@ public class CocktailServiceIntegrationTest {
     @Test
     public void thatCocktailCanBeAddedAsAuthenticatedUser() throws Exception {
 
-        authenticatedUser.call(() -> {
+        authenticatedUser.run(() -> {
 
-            Cocktail tequilaSunrise = new Cocktail("Tequila Sunrise " + new Date());
-            tequilaSunrise.addIngredient("Tequila");
-            tequilaSunrise.addIngredient("Orangensaft");
-            tequilaSunrise.addIngredient("Grenadine");
-            tequilaSunrise.addIngredient("Orange");
-            tequilaSunrise.setDescription("Mixen und genießen!");
+            Cocktail tequilaSunrise = newCocktail();
 
             cocktailService.add(tequilaSunrise);
 
@@ -59,7 +55,6 @@ public class CocktailServiceIntegrationTest {
             assertNotEquals(0, cocktailList.size());
             assertNotNull(cocktailList.get(0).getId());
 
-            return null;
         });
 
     }
@@ -67,19 +62,17 @@ public class CocktailServiceIntegrationTest {
 
     @Test(expected = EJBAccessException.class)
     public void thatCocktailCannotBeAddedAsAnonymous() {
-        Cocktail tequilaSunrise = new Cocktail("Tequila Sunrise " + new Date());
-        tequilaSunrise.addIngredient("Tequila");
-        tequilaSunrise.addIngredient("Orangensaft");
-        tequilaSunrise.addIngredient("Grenadine");
-        tequilaSunrise.addIngredient("Orange");
-        tequilaSunrise.setDescription("Mixen und genießen!");
+        Cocktail tequilaSunrise = newCocktail();
 
         cocktailService.add(tequilaSunrise);
 
     }
 
+
     @Test
     public void thatRandomCocktailIsReturned() throws Exception{
+        authenticatedUser.run(() -> cocktailService.add(new Cocktail()));
+        authenticatedUser.run(() -> cocktailService.add(new Cocktail()));
 
         Future<Cocktail> future1 = cocktailService.getRandom();
         Future<Cocktail> future2 = cocktailService.getRandom();
@@ -87,5 +80,18 @@ public class CocktailServiceIntegrationTest {
         System.out.println("Found cocktail: " + future1.get().getName());
         System.out.println("Found cocktail: " + future2.get().getName());
     }
+
+
+
+    private Cocktail newCocktail() {
+        Cocktail tequilaSunrise = new Cocktail("Tequila Sunrise " + new Date());
+        tequilaSunrise.addIngredient("Tequila");
+        tequilaSunrise.addIngredient("Orangensaft");
+        tequilaSunrise.addIngredient("Grenadine");
+        tequilaSunrise.addIngredient("Orange");
+        tequilaSunrise.setDescription("Mixen und genießen!");
+        return tequilaSunrise;
+    }
+
 
 }

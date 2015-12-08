@@ -10,8 +10,8 @@ import java.util.concurrent.Callable;
 @PermitAll
 public class AuthenticatedUser {
 
-    public void call(Callable callable) throws Exception {
-        callable.call();
+    public void run(Runnable runnable) throws Exception {
+        runnable.run();
     }
 
 }
