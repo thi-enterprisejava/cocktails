@@ -1,0 +1,8 @@
+batch
+# Configure the security domain
+/subsystem=security/security-domain=cocktailSecurityDomain/:add(cache-type=default)
+/subsystem=security/security-domain=cocktailSecurityDomain/authentication=classic:add(login-modules=[{"code"=>"Simple", "flag"=>"required"}])
+# Run the batch commands
+run-batch
+# Reload the server configuration
+:reload
