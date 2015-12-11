@@ -47,6 +47,7 @@ public class CocktailServiceIntegrationTest {
         return webArchive;
     }
 
+
     @Test
     public void thatCocktailCanBeAddedAsAuthenticatedUser() throws Exception {
 
