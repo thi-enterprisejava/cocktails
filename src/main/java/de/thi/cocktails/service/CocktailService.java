@@ -67,6 +67,10 @@ public class CocktailService {
         List<Cocktail> cocktailList = findAll();
         int count = cocktailList.size();
 
+        if(count < 1) {
+            return new AsyncResult<>(null);
+        }
+
         Random random = new Random();
         int randomNumber = random.nextInt(count);
 

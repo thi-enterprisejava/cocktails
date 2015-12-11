@@ -14,4 +14,8 @@ public class AuthenticatedUser {
         callable.call();
     }
 
+    public void run(Runnable runnable) throws Exception {
+        runnable.run();
+    }
+
 }
