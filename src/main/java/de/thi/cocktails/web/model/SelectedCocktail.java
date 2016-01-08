@@ -11,6 +11,9 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The currently selected cocktail
+ */
 @Named
 @ViewScoped
 public class SelectedCocktail implements Serializable {
